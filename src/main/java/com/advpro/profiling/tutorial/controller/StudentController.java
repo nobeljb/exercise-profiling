@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author muhammad.khadafi
@@ -24,18 +25,17 @@ public class StudentController {
 
     @GetMapping("/all-student")
     public ResponseEntity<String> seedStudents() {
-        List<StudentCourse> studentCourses = studentService.getAllStudentsWithCourses();
-        return ResponseEntity.ok(studentCourses.toString());
+        return ResponseEntity.ok(studentService.getAllStudentsWithCourses().toString());
     }
+
     @GetMapping("/highest-gpa")
     public ResponseEntity<String> highestGpa() {
-        Optional<Student> studentWithHighestGpa = studentService.findStudentWithHighestGpa();
-        return ResponseEntity.ok(studentWithHighestGpa.get().toString());
+        return ResponseEntity.ok(studentService.findStudentWithHighestGpa().get().toString());
     }
+
     @GetMapping("/all-student-name")
-    public ResponseEntity<String> allStudentName() {
-        String joinedStudentNames = studentService.joinStudentNames();
-        return ResponseEntity.ok(joinedStudentNames);
+    public ResponseEntity<String> allStudentNames() {
+        return ResponseEntity.ok(studentService.joinStudentNames());
     }
 }
 
